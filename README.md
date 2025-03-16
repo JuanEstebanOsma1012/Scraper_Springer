@@ -1,5 +1,5 @@
 # Scraper_Springer
-Simple Springer Scrapper to download masive searches metadata in a .ris format
+Simple Springer Scraper to download masive searches metadata in a .ris format
 
 # Version funcional
 The script works in Python 3.9.8
