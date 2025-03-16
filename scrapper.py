@@ -1,16 +1,16 @@
 from playwright.sync_api import sync_playwright
 import os
+import sys
 
-LINK="https://link.springer.com/search?new-search=true&query=%28HTCondor+OR+Condor%29+AND+%28HTC+OR+%28High+Throughput+Computing%29%29+AND+%28Universe+OR+%28Runtime+Environment%29%29+AND+%28Research+OR+Teaching+OR+Industry%29&content-type=research&date=custom&dateFrom=2005&dateTo=2024&sortBy=relevance"
-DOWNLOAD_PATH="/home/juan/Documents/Trabajo de grado/SMS/referencias/"
-
-def download_files():
+def download_files(link, download_path):
     pagina = 0
+    
+    os.makedirs(download_path, exist_ok=True)  # Crear la carpeta si no existe
 
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=False)
         page = browser.new_page()
-        page.goto(LINK)
+        page.goto(link)
         
         page.wait_for_timeout(5000)  # Esperar a que la página cargue
 
@@ -42,7 +42,7 @@ def download_files():
                 with page.expect_download() as download_info:
                     download_button.click()
                     download = download_info.value
-                    filename = os.path.join(DOWNLOAD_PATH, download.suggested_filename)
+                    filename = os.path.join(download_path, download.suggested_filename)
                     download.save_as(filename)
                 
                 page.go_back()
@@ -61,5 +61,13 @@ def download_files():
 
         browser.close()
 
-# Ejecutar el scrapper
-download_files()
+if __name__ == "__main__":
+    if len(sys.argv) != 3:
+        print("Uso: python script.py <link> <ruta_descarga>")
+        sys.exit(1)
+    
+    link = sys.argv[1]
+    download_path = sys.argv[2]
+    
+    download_files(link, download_path)
+
