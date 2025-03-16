@@ -1,4 +1,4 @@
-# Scrapper_Springer
+# Scraper_Springer
 Simple Springer Scrapper to download masive searches metadata in a .ris format
 
 # Version funcional
