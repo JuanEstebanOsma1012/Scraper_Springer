@@ -14,4 +14,4 @@ Before run the script, make sure you have an active virtual environment with pyt
 
 Note: maybe you have to restart your shell after `pip install -r requirements.txt` in order to the shell recognizes the next command
 
-Note: you should change constants on top of the script to adapt the script to you necesities
+Note: you should change constants on top of the script to adapt it to you necesities
